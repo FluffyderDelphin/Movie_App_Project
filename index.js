@@ -1,6 +1,24 @@
 const express = require('express'),
   morgan = require('morgan');
 
+let top10movies = [
+  {
+    place: 1,
+    title: 'Title1',
+    description: 'Lorem Ipsum dolor',
+  },
+  {
+    place: 2,
+    title: 'Title2',
+    description: 'Lorem Ipsum dolor',
+  },
+  {
+    place: 3,
+    title: 'Title3',
+    description: 'Lorem Ipsum dolor',
+  },
+];
+
 const app = express();
 
 app.use(morgan('common'));
