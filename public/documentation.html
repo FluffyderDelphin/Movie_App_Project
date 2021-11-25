@@ -12,5 +12,69 @@
         The user will be able to sign up, update their Information and create a List of their favorite movies.
     </P>
     
+
+    <h2>Api Endpoints</h2>
+    <table>
+        <tr>
+            <th>Name (Url)</th>
+            <th>Http Method</th>
+            <th>Request Format</th>
+            <th>Response Format</th>
+        </tr>
+        <tr>
+            <td>/movies</td>
+            <td>GET</td>
+            <td>none</td>
+            <td>Json Object with a list of Movies</td>
+        </tr>
+        <tr>
+            <td>/movies/[Title]</td>
+            <td>GET</td>
+            <td>none</td>
+            <td>Json Object with Data about a single Movie</td>
+        </tr>
+        <tr>
+            <td>/movies/[Title]/genres</td>
+            <td>GET</td>
+            <td>none</td>
+            <td>Json Object with Description about a Gengre  the specigied Movie</td>
+        </tr>
+        <tr>
+            <td>/movies/[Title]/director</td>
+            <td>GET</td>
+            <td>none</td>
+            <td>Json Object with Description about the Dictor of  the specified Movie</td>
+        </tr>
+        <tr>
+            <td>/users</td>
+            <td>POST</td>
+            <td>Json Object with Users Login Info</td>
+            <td>Json Object that returns the User Info with added ID</td>
+        </tr>
+        <tr>
+            <td>/users/[ID]/[Username]</td>
+            <td>PUT</td>
+            <td>none</td>
+            <td>Message that confirms that the Username was changed</td>
+        </tr>
+        <tr>
+            <td>/users/[ID]/favorite</td>
+            <td>POST</td>
+            <td>JSON Object that either Contains the ID or Title of a Movie from the /movies List</td>
+            <td>Message that confirms that the Movie was added to Favorites</td>
+        </tr>
+        <tr>
+            <td>/users/[ID]/favorite/[Title]</td>
+            <td>DELETE</td>
+            <td>none</td>
+            <td>Message that confirms that the Movie was deleted to Favorites</td>
+        </tr>
+        <tr>
+            <td>/users/[ID]</td>
+            <td>DELETE</td>
+            <td>none</td>
+            <td>Message that confirms that the Users Email has been Removed formt he Userslist</td>
+        </tr>
+    </table>
 </body>
 </html>
