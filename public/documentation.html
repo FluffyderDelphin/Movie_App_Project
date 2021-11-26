@@ -13,68 +13,79 @@
     </P>
     
 
-    <h2>Api Endpoints</h2>
+    <h2>Api Endpoints Table</h2>
     <table>
         <tr>
             <th>Name (Url)</th>
             <th>Http Method</th>
+            <th>Parameter</th>
             <th>Request Format</th>
             <th>Response Format</th>
         </tr>
         <tr>
-            <td>/movies</td>
+            <td>http://localhost:8080/movies</td>
             <td>GET</td>
+            <td>none</td>
             <td>none</td>
             <td>Json Object with a list of Movies</td>
         </tr>
         <tr>
-            <td>/movies/[Title]</td>
+            <td>http://localhost:8080/movies/[Title]</td>
             <td>GET</td>
+            <td>title</td>
             <td>none</td>
             <td>Json Object with Data about a single Movie</td>
         </tr>
         <tr>
-            <td>/movies/[Title]/genres</td>
+            <td>http://localhost:8080/movies/[Title]/genres</td>
             <td>GET</td>
+            <td>title</td>
             <td>none</td>
             <td>Json Object with Description about a Genre  of specified Movie</td>
         </tr>
         <tr>
-            <td>/movies/[Title]/director</td>
+            <td>http://localhost:8080/movies/[Title]/director</td>
             <td>GET</td>
+            <td>title</td>
             <td>none</td>
             <td>Json Object with Description about the Dictor of  the specified Movie</td>
         </tr>
         <tr>
-            <td>/users</td>
+            <td>http://localhost:8080/users</td>
             <td>POST</td>
+            <td>none</td>
             <td>Json Object with Users Login Info</td>
             <td>Json Object that returns the User Info with added ID</td>
         </tr>
         <tr>
-            <td>/users/[ID]/[Username]</td>
+            <td>http://localhost:8080/users/[ID]/[Username]</td>
             <td>PUT</td>
+            <td>id,username</td>
             <td>none</td>
             <td>Message that confirms that the Username was changed</td>
         </tr>
         <tr>
-            <td>/users/[ID]/favorite</td>
+            <td>http://localhost:8080/users/[ID]/favorite</td>
             <td>POST</td>
+            <td>id</td>
             <td>JSON Object that either Contains the ID or Title of a Movie from the /movies List</td>
             <td>Message that confirms that the Movie was added to Favorites</td>
         </tr>
         <tr>
-            <td>/users/[ID]/favorite/[Title]</td>
+            <td>http://localhost:8080/users/[ID]/favorite/[Title]</td>
             <td>DELETE</td>
+            <td>id,title</td>
             <td>none</td>
             <td>Message that confirms that the Movie was deletet to Favorites</td>
         </tr>
         <tr>
-            <td>/users/[ID]</td>
+            <td>http://localhost:8080/users/[ID]</td>
             <td>DELETE</td>
+            <td>id</td>
             <td>none</td>
             <td>Message that confirms that the Users Email has been Removed formt he Userslist</td>
         </tr>
     </table>
+
 </body>
 </html>
