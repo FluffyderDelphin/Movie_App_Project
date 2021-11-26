@@ -21,6 +21,7 @@
             <th>Parameter</th>
             <th>Request Format</th>
             <th>Response Format</th>
+            <th>Description</th>
         </tr>
         <tr>
             <td>http://localhost:8080/movies</td>
@@ -28,6 +29,7 @@
             <td>none</td>
             <td>none</td>
             <td>Json Object with a list of Movies</td>
+            <td>Returns a list of Movies from a Database</td>
         </tr>
         <tr>
             <td>http://localhost:8080/movies/[Title]</td>
@@ -35,6 +37,7 @@
             <td>title</td>
             <td>none</td>
             <td>Json Object with Data about a single Movie</td>
+            <td>Returns a Detailed Description about specified Movietitle</td>
         </tr>
         <tr>
             <td>http://localhost:8080/movies/[Title]/genres</td>
@@ -42,6 +45,7 @@
             <td>title</td>
             <td>none</td>
             <td>Json Object with Description about a Genre  of specified Movie</td>
+            <td>Returns the Gengre Description about the specified Movie</td>
         </tr>
         <tr>
             <td>http://localhost:8080/movies/[Title]/director</td>
@@ -49,6 +53,7 @@
             <td>title</td>
             <td>none</td>
             <td>Json Object with Description about the Dictor of  the specified Movie</td>
+            <td>Returns the Director of specified Movie</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users</td>
@@ -56,6 +61,7 @@
             <td>none</td>
             <td>Json Object with Users Login Info</td>
             <td>Json Object that returns the User Info with added ID</td>
+            <td>Ads User Log In Info to the Websites Userlist</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users/[ID]/[Username]</td>
@@ -63,6 +69,7 @@
             <td>id,username</td>
             <td>none</td>
             <td>Message that confirms that the Username was changed</td>
+            <td>Changes Users Username</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users/[ID]/favorite</td>
@@ -70,6 +77,7 @@
             <td>id</td>
             <td>JSON Object that either Contains the ID or Title of a Movie from the /movies List</td>
             <td>Message that confirms that the Movie was added to Favorites</td>
+            <td>Adds Movie to the Favorites List in the User Profile.</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users/[ID]/favorite/[Title]</td>
@@ -77,6 +85,7 @@
             <td>id,title</td>
             <td>none</td>
             <td>Message that confirms that the Movie was deletet to Favorites</td>
+            <td>Deletes Movie from the Favorite List</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users/[ID]</td>
@@ -84,6 +93,7 @@
             <td>id</td>
             <td>none</td>
             <td>Message that confirms that the Users Email has been Removed formt he Userslist</td>
+            <td>Deletes the Users Email, making him derister from the Site</td>
         </tr>
     </table>
 
