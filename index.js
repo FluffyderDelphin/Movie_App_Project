@@ -1,7 +1,7 @@
-const express = require('express'),
-  morgan = require('morgan'),
-  bodyParser = require('body-parser'),
-  uuid = require('uuid');
+const express = require('express');
+// morgan = require('morgan'),
+// bodyParser = require('body-parser'),
+// uuid = require('uuid');
 
 let top10movies = [
   {
@@ -22,7 +22,7 @@ let top10movies = [
 ];
 
 const app = express();
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 // Get Movie List
 app.get('/movies', (req, res) => {
@@ -47,7 +47,7 @@ app.post('/users', (req, res) => {
   res.send('User was added succesfully');
 });
 // Change Username
-app.put('/users/:name', (req, res) => {
+app.put('/users/:id', (req, res) => {
   res.send('Username was changes succesfully!');
 });
 
