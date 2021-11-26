@@ -28,7 +28,20 @@
             <td>GET</td>
             <td>none</td>
             <td>none</td>
-            <td>Json Object with a list of Movies</td>
+            <td>Json Object with a list of Movies<br>
+                Example: <br>
+                [<br>
+                {<br>
+                    "ID":"*randomly generated id 1*",<br>
+                    "Title":"Title Example 1"<br>
+                },<br>
+                {<br>
+                    "ID":"*randomly generated id 2*",<br>
+                    "Title":"Title Example 2"<br>
+                }, ....<br>
+                ]<br>
+                <br>
+            </td>
             <td>Returns a list of Movies from a Database</td>
         </tr>
         <tr>
@@ -36,7 +49,16 @@
             <td>GET</td>
             <td>title</td>
             <td>none</td>
-            <td>Json Object with Data about a single Movie</td>
+            <td>Json Object with Data about a single Movie <br>
+                Example: <br>
+                {<br>
+                    "ID":"*randomly generated id 1*",<br>
+                    "Title":"Title Example 1",<br>
+                    "Genre":["Genre_1(,Genre_2,....)]<br>
+                    "Director":{name:Exampledirector,...} <br>
+                }<br>
+                <br>
+            </td>
             <td>Returns a Detailed Description about specified Movietitle</td>
         </tr>
         <tr>
@@ -44,45 +66,76 @@
             <td>GET</td>
             <td>title</td>
             <td>none</td>
-            <td>Json Object with Description about a Genre  of specified Movie</td>
-            <td>Returns the Gengre Description about the specified Movie</td>
+            <td>Json Object with a List of Genres this specific Movie belongs to.<br>
+                Example: <br>
+                {["Genre_1(,Genre_2,....)]} <br>
+                <br>
+            </td>
+            <td>Returns the Genre Description about the specified Movie</td>
         </tr>
         <tr>
             <td>http://localhost:8080/movies/[Title]/director</td>
             <td>GET</td>
             <td>title</td>
             <td>none</td>
-            <td>Json Object with Description about the Dictor of  the specified Movie</td>
-            <td>Returns the Director of specified Movie</td>
+            <td>Json Object with Description about the Dictor of  the specified Movie<br>
+                Example: <br>
+                {<br>
+                    "Name":"Max MusterDirector",<br>
+                    "Birthday":"dd.mm.yyyy",<br>
+                    "Bio":'Bio Url' <br>
+                    *Optional*"Year_of_Passing":"dd.mm.yyy"<br>
+                }<br>
+            </td>
+            <td>Returns the Director´s Details of  a specified Movie</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users</td>
             <td>POST</td>
             <td>none</td>
-            <td>Json Object with Users Login Info</td>
-            <td>Json Object that returns the User Info with added ID</td>
-            <td>Ads User Log In Info to the Websites Userlist</td>
+            <td>Json Object with Users Registration  Info <br>
+                Example: <br>
+                {<br>
+                    "Name":"Max MusterUser",<br>
+                    "Birthday":"dd.mm.yyyy",<br>
+                    "Password":'SecretPw', <br>
+                    "Email":2example@examplemail.com" <br>
+                    *Optional*"Favorites":["title_1"(,"title_2,...")]}<br>
+                }<br>
+            </td>
+            <td>Json Object that returns the newly registerd User Info with added ID <br>
+                Example: <br>
+                {<br>
+                    "ID":"*randomly generated User ID*"
+                    "Name":"Max MusterUser",<br>
+                    "Birthday":"dd.mm.yyyy",<br>
+                    "Password":'SecretPw', <br>
+                    "Email":2example@examplemail.com" <br>
+                    *Optional*"Favorites":["title_1"(,"title_2,...")]}<br>
+                }<br>
+            </td>
+            <td>Adds User Registration Info to the Websites Userlist</td>
         </tr>
         <tr>
-            <td>http://localhost:8080/users/[ID]/[Username]</td>
+            <td>http://localhost:8080/users/[User_ID]/[Username]</td>
             <td>PUT</td>
-            <td>id,username</td>
+            <td>user_id,username</td>
             <td>none</td>
             <td>Message that confirms that the Username was changed</td>
             <td>Changes Users Username</td>
         </tr>
         <tr>
-            <td>http://localhost:8080/users/[ID]/favorite</td>
+            <td>http://localhost:8080/users/[User_ID]/favorite/[title]</td>
             <td>POST</td>
-            <td>id</td>
-            <td>JSON Object that either Contains the ID or Title of a Movie from the /movies List</td>
+            <td>user_id,title</td>
+            <td>none</td>
             <td>Message that confirms that the Movie was added to Favorites</td>
             <td>Adds Movie to the Favorites List in the User Profile.</td>
         </tr>
         <tr>
-            <td>http://localhost:8080/users/[ID]/favorite/[Title]</td>
+            <td>http://localhost:8080/users/[User_ID]/favorite/[Title]</td>
             <td>DELETE</td>
-            <td>id,title</td>
+            <td>user_id,title</td>
             <td>none</td>
             <td>Message that confirms that the Movie was deletet to Favorites</td>
             <td>Deletes Movie from the Favorite List</td>
@@ -90,7 +143,7 @@
         <tr>
             <td>http://localhost:8080/users/[ID]</td>
             <td>DELETE</td>
-            <td>id</td>
+            <td>user_id</td>
             <td>none</td>
             <td>Message that confirms that the Users Email has been Removed formt he Userslist</td>
             <td>Deletes the Users Email, making him derister from the Site</td>
