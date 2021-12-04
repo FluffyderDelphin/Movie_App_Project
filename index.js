@@ -1,15 +1,15 @@
 const express = require('express'),
   morgan = require('morgan'),
   mongoose = require('mongoose'),
-  models = require('./models.js');
+  models = require('./mongoose_models/models.js');
 
-const Movies = models.Movies;
+const movies = models.Movies;
 const users = models.Users;
 
-// bodyParser = require('body-parser'),
-// uuid = require('uuid');
+const bodyParser = require('body-parser');
+// const uuid = require('uuid');
 
-mongoose.connect('mongodb://localhost:27017/dbname', {
+mongoose.connect('mongodb://localhost:27017/appdb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -17,11 +17,12 @@ mongoose.connect('mongodb://localhost:27017/dbname', {
 const app = express();
 app.use(morgan('common'));
 app.use(express.static('public'));
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 // Get Movie List
 app.get('/movies', (req, res) => {
   // res.json(movies);
+  movies.find().then((movies) => res.json(movies));
   res.send('GETing the List of Movies was a success !');
 });
 
@@ -39,6 +40,33 @@ app.get('/movies/:title/director', (req, res) => {
 });
 // Add User
 app.post('/users', (req, res) => {
+  users
+    .find({ username: req.body.username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.username + 'already exists');
+      } else {
+        users
+          .create({
+            Username: req.body.username,
+            password: req.body.password,
+            email: req.body.email,
+            birthday: req.body.birthday,
+          })
+          .then((user) => {
+            res.status(201).json(user);
+          })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error:' + error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error' + error);
+    });
+
   res.send('User was added succesfully');
 });
 // Change Username
