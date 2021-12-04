@@ -3,8 +3,8 @@ const express = require('express'),
   mongoose = require('mongoose'),
   models = require('./mongoose_models/models.js');
 
-const movies = models.Movies;
-const users = models.Users;
+const movies = models.movies;
+const users = models.users;
 
 const bodyParser = require('body-parser');
 // const uuid = require('uuid');
@@ -38,17 +38,17 @@ app.get('/movies/:title/genre', (req, res) => {
 app.get('/movies/:title/director', (req, res) => {
   res.send('GETing the Details about the Title Director was succesful');
 });
-// Add User
+// Add Use
 app.post('/users', (req, res) => {
   users
-    .find({ username: req.body.username })
+    .findOne({ username: req.body.username })
     .then((user) => {
       if (user) {
         return res.status(400).send(req.body.username + 'already exists');
       } else {
         users
           .create({
-            Username: req.body.username,
+            username: req.body.username,
             password: req.body.password,
             email: req.body.email,
             birthday: req.body.birthday,
@@ -58,17 +58,16 @@ app.post('/users', (req, res) => {
           })
           .catch((error) => {
             console.error(error);
-            res.status(500).send('Error:' + error);
+            res.status(500).send('Error: ' + error);
           });
       }
     })
     .catch((error) => {
       console.error(error);
-      res.status(500).send('Error' + error);
+      res.status(500).send('Error: ' + error);
     });
-
-  res.send('User was added succesfully');
 });
+
 // Change Username
 app.put('/users/:id', (req, res) => {
   res.send('Username was changes succesfully!');
