@@ -1,25 +1,18 @@
 const express = require('express'),
-  morgan = require('morgan');
+  morgan = require('morgan'),
+  mongoose = require('mongoose'),
+  models = require('./models.js');
+
+const Movies = models.Movies;
+const users = models.Users;
+
 // bodyParser = require('body-parser'),
 // uuid = require('uuid');
 
-let top10movies = [
-  {
-    place: 1,
-    title: 'Title1',
-    description: 'Lorem Ipsum dolor',
-  },
-  {
-    place: 2,
-    title: 'Title2',
-    description: 'Lorem Ipsum dolor',
-  },
-  {
-    place: 3,
-    title: 'Title3',
-    description: 'Lorem Ipsum dolor',
-  },
-];
+mongoose.connect('mongodb://localhost:27017/dbname', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const app = express();
 app.use(morgan('common'));
