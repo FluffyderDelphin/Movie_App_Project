@@ -3,8 +3,8 @@ const express = require('express'),
   mongoose = require('mongoose'),
   models = require('./mongoose_models/models.js');
 
-const movies = models.movies;
-const users = models.users;
+const movie = models.movie;
+const user = models.user;
 
 const bodyParser = require('body-parser');
 // const uuid = require('uuid');
@@ -22,8 +22,7 @@ app.use(bodyParser.json());
 // Get Movie List
 app.get('/movies', (req, res) => {
   // res.json(movies);
-  movies.find().then((movies) => res.json(movies));
-  res.send('GETing the List of Movies was a success !');
+  movie.find().then((movie) => res.json(movie));
 });
 
 // Get Data About Movie by Title
@@ -40,13 +39,13 @@ app.get('/movies/:title/director', (req, res) => {
 });
 // Add Use
 app.post('/users', (req, res) => {
-  users
+  user
     .findOne({ username: req.body.username })
     .then((user) => {
       if (user) {
-        return res.status(400).send(req.body.username + 'already exists');
+        return res.status(400).send(req.body.username + ' already exists');
       } else {
-        users
+        user
           .create({
             username: req.body.username,
             password: req.body.password,
