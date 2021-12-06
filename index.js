@@ -2,13 +2,14 @@ const express = require('express'),
   morgan = require('morgan'),
   mongoose = require('mongoose'),
   models = require('./mongoose_models/models.js');
-
-const movie = models.movie;
-const user = models.user;
-
 const bodyParser = require('body-parser');
 // const uuid = require('uuid');
 
+// Declaring Exportet Mongoose Models
+const Movies = models.Movies;
+const Users = models.Users;
+
+// Connecting to MongoDB Database
 mongoose.connect('mongodb://localhost:27017/appdb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -22,7 +23,7 @@ app.use(bodyParser.json());
 // Get Movie List
 app.get('/movies', (req, res) => {
   // res.json(movies);
-  movie.find().then((movie) => res.json(movie));
+  Movies.find().then((movies) => res.json(movies));
 });
 
 // Get Data About Movie by Title
@@ -39,19 +40,17 @@ app.get('/movies/:title/director', (req, res) => {
 });
 // Add Use
 app.post('/users', (req, res) => {
-  user
-    .findOne({ username: req.body.username })
+  Users.findOne({ username: req.body.username })
     .then((user) => {
       if (user) {
         return res.status(400).send(req.body.username + ' already exists');
       } else {
-        user
-          .create({
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-            birthday: req.body.birthday,
-          })
+        Users.create({
+          username: req.body.username,
+          password: req.body.password,
+          email: req.body.email,
+          birthday: req.body.birthday,
+        })
           .then((user) => {
             res.status(201).json(user);
           })
