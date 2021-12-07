@@ -4,7 +4,7 @@ let movieShema = mongoose.Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    Genre: {
+    genre: {
       name: String,
       description: String,
     },
@@ -25,7 +25,7 @@ let userShema = mongoose.Schema(
     password: { type: String, required: true },
     email: { type: String, required: true },
     birthday: Date,
-    favmovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movies' }],
+    favMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movies' }],
   },
   { collection: 'users' }
 );
