@@ -94,7 +94,7 @@ app.get('/users', (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send('Errror: ' + err);
+      res.status(500).send('Error: ' + err);
     });
 });
 // Read User by Name
@@ -133,7 +133,7 @@ app.put('/users/:username', (req, res) => {
   );
 });
 // Adding Movie to Users List of Favorites
-app.put('/users/:username/favorites/:movieID', (req, res) => {
+app.put('/users/:username/favorites/add/:movieID', (req, res) => {
   Users.findOneAndUpdate(
     { username: req.params.username },
     {
@@ -145,7 +145,8 @@ app.put('/users/:username/favorites/:movieID', (req, res) => {
         console.error(err);
         res.status(500).send('Error: ' + err);
       } else {
-        res.json(updatedUser);
+        // res.json(updatedUser);
+        res.send(req.params.movieID + 'was succesfully added to Favorites!');
       }
     }
   );
@@ -156,12 +157,12 @@ app.put('/users/:username/favorites/remove/:movieID', (req, res) => {
     { username: req.params.username },
     { $pull: { favMovies: req.params.movieID } },
     { new: true },
-    (err, updatedUser) => {
+    (err) => {
       if (err) {
         console.error(err);
         res.status(500).send('Error: ' + err);
       } else {
-        res.json(updatedUser);
+        res.send(req.params.movieID + 'was removed from Favorites');
       }
     }
   );

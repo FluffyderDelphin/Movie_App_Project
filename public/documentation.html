@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Movie API</title>
 </head>
 <body>
@@ -29,63 +30,77 @@
             <td>none</td>
             <td>none</td>
             <td>Json Object with a list of Movies<br>
-                Example: <br>
-                [<br>
-                {<br>
-                    "ID":"*randomly generated id 1*",<br>
-                    "Title":"Title Example 1"<br>
-                },<br>
-                {<br>
-                    "ID":"*randomly generated id 2*",<br>
-                    "Title":"Title Example 2"<br>
-                }, ....<br>
-                ]<br>
-                <br>
+             <pre><code>{
+                "genre": {
+                    "name": "comedy",
+                    "description": "Comedy is a genre of film in which the main emphasis is on humor. 
+                    These films are designed to......
+                },
+                "director": {
+                    "name": "Taika Waititi",
+                    "bio": "Taika Waititi film and television .....",
+                    "birth": "1975-08-16"
+                },
+                "actors": [],
+                "_id": "61a8dd9c2c5b82227094ce56",
+                "title": "What we do in the Shadows",
+                "imageurl": "https://picsum.photos/230/300?random=1",
+                "description": "A Movie about funny Vampires"
+            },...
+            </code></pre>
             </td>
             <td>Returns a list of Movies from a Database</td>
         </tr>
         <tr>
-            <td>http://localhost:8080/movies/[Title]</td>
+            <td>http://localhost:8080/movies/[:title]</td>
             <td>GET</td>
             <td>title</td>
             <td>none</td>
             <td>Json Object with Data about a single Movie <br>
-                Example: <br>
-                {<br>
-                    "ID":"*randomly generated id 1*",<br>
-                    "Title":"Title Example 1",<br>
-                    "Genre":["Genre_1(,Genre_2,....)]<br>
-                    "Director":{name:Exampledirector,...} <br>
-                }<br>
-                <br>
+                <pre><code>    {
+                    "genre": {
+                        "name": "comedy",
+                        "description": "Comedy is a genre of film in which ...."
+                    },
+                    "director": {
+                        "name": "Taika Waititi",
+                        "bio": "Taika Waititi film and television directo......",
+                        "birth": "1975-08-16"
+                    },
+                    "actors": [],
+                    "_id": "61a8e5cf2c5b82227094ce59",
+                    "title": "Jojo Rabbit",
+                    "imageurl": "https://picsum.photos/230/300?random=3",
+                    "description": "During the collapse of Nazi Germany in the fictional city of Falkenheim,..."
+                }
+    </code></pre>
+            
             </td>
             <td>Returns a Detailed Description about specified Movietitle</td>
         </tr>
         <tr>
-            <td>http://localhost:8080/movies/[Title]/genres</td>
+            <td>http://localhost:8080/movies/genre/[:genrename]</td>
             <td>GET</td>
-            <td>title</td>
+            <td>genrename</td>
             <td>none</td>
-            <td>Json Object with a List of Genres this specific Movie belongs to.<br>
+            <td> String with the genre Description: <br>
                 Example: <br>
-                {["Genre_1(,Genre_2,....)]} <br>
-                <br>
+               ' Comedy is a genre of film in which...'
             </td>
             <td>Returns the Genre Description about the specified Movie</td>
         </tr>
         <tr>
-            <td>http://localhost:8080/movies/[Title]/director</td>
+            <td>http://localhost:8080/movies/[:director]</td>
             <td>GET</td>
             <td>title</td>
             <td>none</td>
             <td>Json Object with Description about the Dictor of  the specified Movie<br>
                 Example: <br>
-                {<br>
-                    "Name":"Max MusterDirector",<br>
-                    "Birthday":"dd.mm.yyyy",<br>
-                    "Bio":'Bio Url' <br>
-                    *Optional*"Year_of_Passing":"dd.mm.yyy"<br>
-                }<br>
+              <pre><code>{
+                "name": "Taika Waititi",
+                "bio": "Taika Waititi film and television director,...",
+                "birth": "1975-08-16"
+            }</code></pre>
             </td>
             <td>Returns the Director´s Details of  a specified Movie</td>
         </tr>
@@ -95,58 +110,71 @@
             <td>none</td>
             <td>Json Object with Users Registration  Info <br>
                 Example: <br>
-                {<br>
-                    "Name":"Max MusterUser",<br>
-                    "Birthday":"dd.mm.yyyy",<br>
-                    "Password":'SecretPw', <br>
-                    "Email":2example@examplemail.com" <br>
-                    *Optional*"Favorites":["title_1"(,"title_2,...")]}<br>
-                }<br>
+              <pre><code>{
+                "username":"Example",
+                "password":"555555",
+                "email":"examplemail@.com",
+                "birthday":"1999-02-022"
+            }</code></pre>
             </td>
-            <td>Json Object that returns the newly registerd User Info with added ID <br>
+            <td>Json Object that returns the newly registerd User Info with randomly genreated ID <br>
                 Example: <br>
-                {<br>
-                    "ID":"*randomly generated User ID*"
-                    "Name":"Max MusterUser",<br>
-                    "Birthday":"dd.mm.yyyy",<br>
-                    "Password":'SecretPw', <br>
-                    "Email":2example@examplemail.com" <br>
-                    *Optional*"Favorites":["title_1"(,"title_2,...")]}<br>
-                }<br>
+                <pre><code>{
+                    "_id"::"448869368723146"
+                    "username":"Example",
+                    "password":"555555",
+                    "email":"examplemail@.com",
+                    "birthday":"1999-02-022"
+                }</code></pre>
             </td>
             <td>Adds User Registration Info to the Websites Userlist</td>
         </tr>
         <tr>
-            <td>http://localhost:8080/users/[User_ID]/[Username]</td>
+            <td>http://localhost:8080/users/[:username]</td>
             <td>PUT</td>
             <td>user_id,username</td>
-            <td>none</td>
-            <td>Message that confirms that the Username was changed</td>
-            <td>Changes Users Username</td>
+            <td>  Json Data with Data to Update <br> <pre><code>
+                {
+                    "username":"Example New",
+                    "password":"555555",
+                    "email":"moritzmail@,com",
+                    "birthday":"1999-02-022"
+                }
+            </code></pre></td>
+            <td>Json Data with Updated Profile<br>
+                <pre><code>
+                {
+                    "username":"Example New",
+                    "password":"555555",
+                    "email":"moritzmail@,com",
+                    "birthday":"1999-02-022"
+                }
+            </code></pre></td>
+            <td>Changes Users Data by Username</td>
         </tr>
         <tr>
-            <td>http://localhost:8080/users/[User_ID]/favorite/[title]</td>
+            <td>http://localhost:8080/users/[username]/favorite/add/[movieID]</td>
             <td>POST</td>
             <td>user_id,title</td>
             <td>none</td>
-            <td>Message that confirms that the Movie was added to Favorites</td>
+            <td>"[movieID] succesfully added to Favorites!"</td>
             <td>Adds Movie to the Favorites List in the User Profile.</td>
         </tr>
         <tr>
-            <td>http://localhost:8080/users/[User_ID]/favorite/[Title]</td>
-            <td>DELETE</td>
+            <td>http://localhost:8080/users/[:username]/favorite/remove/[:movieID]</td>
+            <td>POST</td>
             <td>user_id,title</td>
             <td>none</td>
-            <td>Message that confirms that the Movie was deletet to Favorites</td>
+            <td>[:movieID]was removed from Favorites'</td>
             <td>Deletes Movie from the Favorite List</td>
         </tr>
         <tr>
-            <td>http://localhost:8080/users/[ID]</td>
+            <td>http://localhost:8080/users/[:userId]</td>
             <td>DELETE</td>
             <td>user_id</td>
             <td>none</td>
-            <td>Message that confirms that the Users Email has been Removed formt he Userslist</td>
-            <td>Deletes the Users Email, making him derister from the Site</td>
+            <td>'User with the ID: [:userId] deleted'</td>
+            <td>Deletes User</td>
         </tr>
     </table>
 
