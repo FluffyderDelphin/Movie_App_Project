@@ -22,7 +22,6 @@ app.use(bodyParser.json());
 
 // Get Movie List
 app.get('/movies', (req, res) => {
-  // res.json(movies);
   Movies.find().then((movies) => res.json(movies));
 });
 

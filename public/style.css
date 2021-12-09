@@ -1,8 +1,5 @@
 body {
   font-family: Calibri, Arial;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-size: 18px;
 }
 
