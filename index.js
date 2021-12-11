@@ -23,6 +23,9 @@ app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 let auth = require('./auth')(app);
+
+const passport = require('passport');
+require('./passport');
 // Get Movie List
 app.get(
   '/movies',
