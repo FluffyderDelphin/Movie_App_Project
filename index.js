@@ -20,9 +20,9 @@ const app = express();
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
-let auth = require('.auth')(app);
+let auth = require('./auth')(app);
 // Get Movie List
 app.get(
   '/movies',
