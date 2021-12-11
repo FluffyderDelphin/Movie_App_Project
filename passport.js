@@ -1,6 +1,6 @@
 const passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
-  Models = require('./models.js'),
+  Models = require('./mongoose_models/models.js'),
   passportJWT = require('passport-jwt');
 
 let Users = Models.User,
@@ -21,7 +21,7 @@ passport.use(
           return callback(error);
         }
         if (!user) {
-          console.log('iincorrect username');
+          console.log('incorrect username');
           return callback(null, false, {
             message: 'Incorect username or password.',
           });

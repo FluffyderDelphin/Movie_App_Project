@@ -3,6 +3,7 @@ const express = require('express'),
   mongoose = require('mongoose'),
   models = require('./mongoose_models/models.js');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 // const uuid = require('uuid');
 
 // Declaring Exportet Mongoose Models
@@ -19,11 +20,17 @@ const app = express();
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+let auth = require('.auth')(app);
 // Get Movie List
-app.get('/movies', (req, res) => {
-  Movies.find().then((movies) => res.json(movies));
-});
+app.get(
+  '/movies',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Movies.find().then((movies) => res.json(movies));
+  }
+);
 
 // Get Data About Movie by Title
 app.get('/movies/:title', (req, res) => {
