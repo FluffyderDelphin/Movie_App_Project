@@ -190,6 +190,29 @@
             <td>'User with the ID: [:userId] deleted'</td>
             <td>Deletes User</td>
         </tr>
+        <tr>
+            <td>http://localhost:8080/login</td>
+            <td>POST</td>
+            <td>username,password</td>
+            <td>none</td>
+            <td>
+            <pre><code>
+{
+    "user": {
+        "_id": "61b47bd72b4e653bbe77e7f3",
+        "username": "Test",
+        "password": "123",
+        "email": "testmail@,com",
+        "birthday": "1999-02-21T23:00:00.000Z",
+        "favMovies": [],
+        "__v": 0
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6Ik..."
+}
+            </code></pre>
+        </td>
+            <td>Gives the User a JWT Token upon login in, that enables the use of the other Crud Operations</td>
+        </tr>
     </table>
 
 </body>
