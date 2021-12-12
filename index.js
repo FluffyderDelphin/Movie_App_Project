@@ -81,36 +81,32 @@ app.get(
   }
 );
 // Add User
-app.post(
-  '/users',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    Users.findOne({ username: req.params.username })
-      .then((user) => {
-        if (user) {
-          return res.status(400).send(req.body.username + ' already exists');
-        } else {
-          Users.create({
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-            birthday: req.body.birthday,
+app.post('/users', (req, res) => {
+  Users.findOne({ username: req.params.username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.username + ' already exists');
+      } else {
+        Users.create({
+          username: req.body.username,
+          password: req.body.password,
+          email: req.body.email,
+          birthday: req.body.birthday,
+        })
+          .then((user) => {
+            res.status(201).json(user);
           })
-            .then((user) => {
-              res.status(201).json(user);
-            })
-            .catch((error) => {
-              console.error(error);
-              res.status(500).send('Error: ' + error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send('Error: ' + error);
-      });
-  }
-);
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
+});
 // Read User Data
 app.get(
   '/users',

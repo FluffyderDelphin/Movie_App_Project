@@ -23,6 +23,7 @@
             <th>Request Format</th>
             <th>Response Format</th>
             <th>Description</th>
+            <th>Authentication</th>
         </tr>
         <tr>
             <td>http://localhost:8080/movies</td>
@@ -56,6 +57,7 @@
             </code></pre>
             </td>
             <td>Returns a list of Movies from the Database</td>
+            <td>Needs Beared Token(Jwt)</td>
         </tr>
         <tr>
             <td>http://localhost:8080/movies/[:title]</td>
@@ -82,6 +84,7 @@
             
             </td>
             <td>Returns a Detailed Description about specified Movietitle</td>
+            <td>Needs Beared Token(Jwt)</td>
         </tr>
         <tr>
             <td>http://localhost:8080/movies/genres/[:genrename]</td>
@@ -93,6 +96,7 @@
                ' Comedy is a genre of film in which...'
             </td>
             <td>Returns the Genre Description about the specified Movie</td>
+            <td>Needs Beared Token(Jwt)</td>
         </tr>
         <tr>
             <td>http://localhost:8080/movies/directors/[:director]</td>
@@ -110,6 +114,7 @@
 </code></pre>
             </td>
             <td>Returns the Director´s Details of  a specified Movie</td>
+            <td>Needs Beared Token(Jwt)</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users</td>
@@ -140,6 +145,7 @@
 </code></pre>
             </td>
             <td>Adds User Registration Info to the Websites Userlist</td>
+            <td>none</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users/[:username]</td>
@@ -165,6 +171,7 @@
         }
             </code></pre></td>
             <td>Changes Users Data by Username</td>
+            <td>Needs Beared Token(Jwt)</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users/[username]/favorites/add/[movieID]</td>
@@ -173,6 +180,7 @@
             <td>none</td>
             <td>"[movieID] succesfully added to Favorites!"</td>
             <td>Adds Movie to the Favorites List in the User Profile.</td>
+            <td>Needs Beared Token(Jwt)</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users/[:username]/favorites/remove/[:movieID]</td>
@@ -181,6 +189,7 @@
             <td>none</td>
             <td>[:movieID]was removed from Favorites'</td>
             <td>Deletes Movie from the Favorite List</td>
+            <td>Needs Beared Token(Jwt)</td>
         </tr>
         <tr>
             <td>http://localhost:8080/users/[:userId]</td>
@@ -189,14 +198,21 @@
             <td>none</td>
             <td>'User with the ID: [:userId] deleted'</td>
             <td>Deletes User</td>
+            <td>Needs Beared Token(Jwt)</td>
         </tr>
         <tr>
             <td>http://localhost:8080/login</td>
             <td>POST</td>
             <td>username,password</td>
-            <td>none</td>
             <td>
-            <pre><code>
+ <pre><code>
+{
+    "username": "Test",
+    "password": "123"
+}
+            </code></pre></td>
+            <td>
+ <pre><code>
 {
     "user": {
         "_id": "61b47bd72b4e653bbe77e7f3",
@@ -211,7 +227,10 @@
 }
             </code></pre>
         </td>
-            <td>Gives the User a JWT Token upon login in, that enables the use of the other Crud Operations</td>
+            <td>Gives the User a JWT Token upon login in, that enables the use of the other Crud Operations.
+                Login Data will be send trough parameters or the Request Body
+            </td>
+            <td>Basic Http authentication that requires password and username</td>
         </tr>
     </table>
 
