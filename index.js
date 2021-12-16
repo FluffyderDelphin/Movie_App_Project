@@ -24,6 +24,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const passport = require('passport');
 require('./passport');
 app.use(passport.initialize());
+const cors = require('cors');
+app.use(cors());
 require('./auth')(app);
 
 // Get Movie List
