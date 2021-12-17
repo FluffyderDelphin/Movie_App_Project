@@ -25,7 +25,26 @@ const passport = require('passport');
 require('./passport');
 app.use(passport.initialize());
 const cors = require('cors');
-app.use(cors());
+
+// app.use(cors());
+
+let allowedOrigins = ['http://localhost:8080'];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        let message =
+          "The CORS policy for this application doesn't allow access from origin " +
+          origin;
+        return callback(new Error(message), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
+
 require('./auth')(app);
 
 // Get Movie List
@@ -84,6 +103,7 @@ app.get(
 );
 // Add User
 app.post('/users', (req, res) => {
+  let hashedPassword = Users.hashedPassword(req.body.password);
   Users.findOne({ username: req.params.username })
     .then((user) => {
       if (user) {
@@ -91,7 +111,7 @@ app.post('/users', (req, res) => {
       } else {
         Users.create({
           username: req.body.username,
-          password: req.body.password,
+          password: hashedPassword,
           email: req.body.email,
           birthday: req.body.birthday,
         })

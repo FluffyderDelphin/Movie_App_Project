@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 let movieShema = mongoose.Schema(
   {
@@ -29,6 +30,13 @@ let userShema = mongoose.Schema(
   },
   { collection: 'users' }
 );
+userShema.statics.hashPassword = (password) => {
+  return bcrypt.hashSync(password, 10);
+};
+
+userShema.methods.validatePassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
 
 let Movies = mongoose.model('Movies', movieShema);
 let Users = mongoose.model('User', userShema);
