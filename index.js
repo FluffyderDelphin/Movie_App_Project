@@ -26,6 +26,8 @@ require('./passport');
 app.use(passport.initialize());
 const cors = require('cors');
 
+const { check, validatonResult } = require('express-validator');
+
 // app.use(cors());
 
 let allowedOrigins = ['http://localhost:8080'];
@@ -102,33 +104,52 @@ app.get(
   }
 );
 // Add User
-app.post('/users', (req, res) => {
-  let hashedPassword = Users.hashedPassword(req.body.password);
-  Users.findOne({ username: req.params.username })
-    .then((user) => {
-      if (user) {
-        return res.status(400).send(req.body.username + ' already exists');
-      } else {
-        Users.create({
-          username: req.body.username,
-          password: hashedPassword,
-          email: req.body.email,
-          birthday: req.body.birthday,
-        })
-          .then((user) => {
-            res.status(201).json(user);
+app.post(
+  '/users',
+  [
+    check(
+      'Username',
+      'Username is required and needs to have at least 5 Characters'
+    ).isLength({ min: 5 }),
+    check(
+      'Username',
+      'Username contains non alphanumeric characters - not allowed.'
+    ).isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
+  ],
+  (req, res) => {
+    let errors = validatonResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    let hashedPassword = Users.hashedPassword(req.body.password);
+    Users.findOne({ username: req.params.username })
+      .then((user) => {
+        if (user) {
+          return res.status(400).send(req.body.username + ' already exists');
+        } else {
+          Users.create({
+            username: req.body.username,
+            password: hashedPassword,
+            email: req.body.email,
+            birthday: req.body.birthday,
           })
-          .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-          });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-    });
-});
+            .then((user) => {
+              res.status(201).json(user);
+            })
+            .catch((error) => {
+              console.error(error);
+              res.status(500).send('Error: ' + error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      });
+  }
+);
 // Read User Data
 app.get(
   '/users',
