@@ -15,7 +15,7 @@ const Users = models.Users;
 //   useUnifiedTopology: true,
 // });
 
-mongoose.connect(process.env.CONNECTION_URI, {
+mongoose.connect(process.env.CONNECTION_TEST, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
