@@ -10,7 +10,12 @@ const Movies = models.Movies;
 const Users = models.Users;
 
 // Connecting to MongoDB Database
-mongoose.connect('mongodb://localhost:27017/appdb', {
+// mongoose.connect('mongodb://localhost:27017/appdb', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -25,7 +30,28 @@ const passport = require('passport');
 require('./passport');
 app.use(passport.initialize());
 const cors = require('cors');
+
+const { check, validatonResult } = require('express-validator');
+
 app.use(cors());
+
+// let allowedOrigins = ['http://localhost:8080'];
+
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.indexOf(origin) === -1) {
+//         let message =
+//           "The CORS policy for this application doesn't allow access from origin " +
+//           origin;
+//         return callback(new Error(message), false);
+//       }
+//       return callback(null, true);
+//     },
+//   })
+// );
+
 require('./auth')(app);
 
 // Get Movie List
@@ -83,32 +109,52 @@ app.get(
   }
 );
 // Add User
-app.post('/users', (req, res) => {
-  Users.findOne({ username: req.params.username })
-    .then((user) => {
-      if (user) {
-        return res.status(400).send(req.body.username + ' already exists');
-      } else {
-        Users.create({
-          username: req.body.username,
-          password: req.body.password,
-          email: req.body.email,
-          birthday: req.body.birthday,
-        })
-          .then((user) => {
-            res.status(201).json(user);
+app.post(
+  '/users',
+  [
+    check(
+      'Username',
+      'Username is required and needs to have at least 5 Characters'
+    ).isLength({ min: 5 }),
+    check(
+      'Username',
+      'Username contains non alphanumeric characters - not allowed.'
+    ).isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
+  ],
+  (req, res) => {
+    let errors = validatonResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    let hashedPassword = Users.hashedPassword(req.body.password);
+    Users.findOne({ username: req.params.username })
+      .then((user) => {
+        if (user) {
+          return res.status(400).send(req.body.username + ' already exists');
+        } else {
+          Users.create({
+            username: req.body.username,
+            password: hashedPassword,
+            email: req.body.email,
+            birthday: req.body.birthday,
           })
-          .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-          });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-    });
-});
+            .then((user) => {
+              res.status(201).json(user);
+            })
+            .catch((error) => {
+              console.error(error);
+              res.status(500).send('Error: ' + error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      });
+  }
+);
 // Read User Data
 app.get(
   '/users',
@@ -237,6 +283,7 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
 });
 
-app.listen(8080, () => {
-  console.log('App ist Running on Port 8080');
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+  console.log(`App ist Running on Port ${port}`);
 });
