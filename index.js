@@ -10,7 +10,12 @@ const Movies = models.Movies;
 const Users = models.Users;
 
 // Connecting to MongoDB Database
-mongoose.connect('mongodb://localhost:27017/appdb', {
+// mongoose.connect('mongodb://localhost:27017/appdb', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -28,24 +33,24 @@ const cors = require('cors');
 
 const { check, validatonResult } = require('express-validator');
 
-// app.use(cors());
+app.use(cors());
 
-let allowedOrigins = ['http://localhost:8080'];
+// let allowedOrigins = ['http://localhost:8080'];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        let message =
-          "The CORS policy for this application doesn't allow access from origin " +
-          origin;
-        return callback(new Error(message), false);
-      }
-      return callback(null, true);
-    },
-  })
-);
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.indexOf(origin) === -1) {
+//         let message =
+//           "The CORS policy for this application doesn't allow access from origin " +
+//           origin;
+//         return callback(new Error(message), false);
+//       }
+//       return callback(null, true);
+//     },
+//   })
+// );
 
 require('./auth')(app);
 
