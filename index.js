@@ -31,7 +31,7 @@ require('./passport');
 app.use(passport.initialize());
 const cors = require('cors');
 
-const { check, validatonResult } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 
 app.use(cors());
 
@@ -124,7 +124,7 @@ app.post(
     check('Email', 'Email does not appear to be valid').isEmail(),
   ],
   (req, res) => {
-    let errors = validatonResult(req);
+    let errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
