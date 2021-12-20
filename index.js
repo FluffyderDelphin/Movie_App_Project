@@ -196,7 +196,7 @@ app.put(
       {
         $set: {
           username: req.body.username,
-          password: req.body.password,
+          password: Users.hashedPassword(req.body.password),
           email: req.body.email,
           birthday: req.body.birthday,
         },
