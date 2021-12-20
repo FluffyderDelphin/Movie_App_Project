@@ -128,7 +128,7 @@ app.post(
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-    let hashedPassword = Users.hashedPassword(req.body.password);
+    let hashedPassword = Users.hashPassword(req.body.password);
     Users.findOne({ username: req.params.username })
       .then((user) => {
         if (user) {
@@ -196,7 +196,7 @@ app.put(
       {
         $set: {
           username: req.body.username,
-          password: Users.hashedPassword(req.body.password),
+          password: Users.hashPassword(req.body.password),
           email: req.body.email,
           birthday: req.body.birthday,
         },
