@@ -1,5 +1,0 @@
-heroku git:remote -a https://git.heroku.com/alexandersmovieapp.git
-
-mongodb+srv://alexanderUlrich:psychopass17LINK@movieapp.3tuli.mongodb.net/appdb?retryWrites=true&w=majority
-
-CONNECTION_URI
