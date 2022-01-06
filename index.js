@@ -55,13 +55,24 @@ app.use(cors());
 require('./auth')(app);
 
 // Get Movie List
-app.get(
-  '/movies',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    Movies.find().then((movies) => res.json(movies));
-  }
-);
+// app.get(
+//   '/movies',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     Movies.find().then((movies) => res.json(movies));
+//   }
+// );
+
+app.get('/movies', function (req, res) {
+  Movies.find()
+    .then(function (movies) {
+      res.status(201).json(movies);
+    })
+    .catch(function (error) {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
+});
 
 // Get Data About Movie by Title
 app.get(
