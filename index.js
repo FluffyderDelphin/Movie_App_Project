@@ -260,7 +260,7 @@ app.put(
       { username: req.params.username },
       { $pull: { favMovies: req.params.movieID } },
       { new: true },
-      (err) => {
+      (err, updatedUser) => {
         if (err) {
           console.error(err);
           res.status(500).send('Error: ' + err);
