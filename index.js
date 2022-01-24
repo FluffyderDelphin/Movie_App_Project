@@ -265,7 +265,8 @@ app.put(
           console.error(err);
           res.status(500).send('Error: ' + err);
         } else {
-          res.send(req.params.movieID + 'was removed from Favorites');
+          res.json(updatedUser);
+          // res.send(req.params.movieID + 'was removed from Favorites');
         }
       }
     );
