@@ -178,7 +178,18 @@
             <td>PUT</td>
             <td>username,movieID</td>
             <td>none</td>
-            <td>"[movieID] succesfully added to Favorites!"</td>
+            <td>
+        <pre><code>
+            {
+                "_id":"448869368723146"
+                "username":"Example",
+                "password":"555555",
+                "email":"examplemail@.com",
+                "birthday":"1999-02-022",
+                "favMovies":[addedMovieID]
+            }
+        </code></pre>
+</td>
             <td>Adds Movie to the Favorites List in the User Profile.</td>
             <td>Needs Beared Token(Jwt)</td>
         </tr>
@@ -187,7 +198,18 @@
             <td>PUT</td>
             <td>username,movieID</td>
             <td>none</td>
-            <td>[:movieID]was removed from Favorites'</td>
+            <td>
+<pre><code>
+    {
+        "_id":"448869368723146"
+        "username":"Example",
+        "password":"555555",
+        "email":"examplemail@.com",
+        "birthday":"1999-02-022",
+        "favMovies":[addedMovieID]
+    }
+</code></pre>
+            </td>
             <td>Deletes Movie from the Favorite List</td>
             <td>Needs Beared Token(Jwt)</td>
         </tr>
