@@ -86,6 +86,7 @@
             <td>Returns a Detailed Description about specified Movietitle</td>
             <td>Needs Beared Token(Jwt)</td>
         </tr>
+        <!-- Get Genre Row -->
         <tr>
             <td>http://localhost:8080/movies/genres/[:genrename]</td>
             <td>GET</td>
@@ -98,6 +99,7 @@
             <td>Returns the Genre Description about the specified Movie</td>
             <td>Needs Beared Token(Jwt)</td>
         </tr>
+        <!-- Get Director User Row -->
         <tr>
             <td>http://localhost:8080/movies/directors/[:director]</td>
             <td>GET</td>
@@ -116,6 +118,7 @@
             <td>Returns the Director´s Details of  a specified Movie</td>
             <td>Needs Beared Token(Jwt)</td>
         </tr>
+        <!-- Register User Row -->
         <tr>
             <td>http://localhost:8080/users</td>
             <td>POST</td>
@@ -147,6 +150,63 @@
             <td>Adds User Registration Info to the Websites Userlist</td>
             <td>none</td>
         </tr>
+        <!-- Get User list Row -->
+        <tr>
+            <td>http://localhost:8080/users</td>
+            <td>GET</td>
+            <td>none</td>
+            <td> none
+            </td>
+            <td>List of JSON User Objects<br>
+                Example: <br>
+<pre><code>
+ [   
+ {
+        "_id":"448869368723146"
+        "username":"Example",
+        "password":"555555",
+        "email":"examplemail@.com",
+        "birthday":"1999-02-022",
+        "favMovies":[]
+    },
+    {
+        "_id":....
+    }
+    ...]
+</code></pre>
+            </td>
+            <td>Gets list of Users</td>
+            <td>Needs Beared Token(Jwt)</td>
+        </tr>
+ <!-- Get single User Data -->
+        <tr>
+            <td>http://localhost:8080/users</td>
+            <td>GET</td>
+            <td>none</td>
+            <td> none
+            </td>
+            <td>List of JSON User Objects<br>
+                Example: <br>
+<pre><code>
+ [   
+ {
+        "_id":"448869368723146"
+        "username":"Example",
+        "password":"555555",
+        "email":"examplemail@.com",
+        "birthday":"1999-02-022",
+        "favMovies":[]
+    },
+    {
+        "_id":....
+    }
+    ...]
+</code></pre>
+            </td>
+            <td>Gets list of Users</td>
+            <td>Needs Beared Token(Jwt)</td>
+        </tr>
+        <!-- Update User Row -->
         <tr>
             <td>http://localhost:8080/users/[:username]</td>
             <td>PUT</td>
@@ -173,6 +233,7 @@
             <td>Changes Users Data by Username</td>
             <td>Needs Beared Token(Jwt)</td>
         </tr>
+        <!-- Update Fav Movie Row -->
         <tr>
             <td>http://localhost:8080/users/[username]/favorites/add/[movieID]</td>
             <td>PUT</td>
@@ -193,6 +254,7 @@
             <td>Adds Movie to the Favorites List in the User Profile.</td>
             <td>Needs Beared Token(Jwt)</td>
         </tr>
+        <!-- Remove Fav Movie Row -->
         <tr>
             <td>http://localhost:8080/users/[:username]/favorites/remove/[:movieID]</td>
             <td>PUT</td>
@@ -213,6 +275,7 @@
             <td>Deletes Movie from the Favorite List</td>
             <td>Needs Beared Token(Jwt)</td>
         </tr>
+        <!-- Delete User Row -->
         <tr>
             <td>http://localhost:8080/users/[:userId]</td>
             <td>DELETE</td>
