@@ -280,13 +280,13 @@ app.delete(
     Users.findOneAndRemove({ _id: req.params.userId })
       .then((user) => {
         if (!user) {
-          res
-            .status(400)
-            .send('User with the ID: ' + req.params.userId + ' was not found');
+          res.status(400).json({
+            message: `user with the the id ${user._id} was not deleted`,
+          });
         } else {
-          res
-            .status(200)
-            .send('User with the ID: ' + req.params.userId + ' deleted');
+          res.status(200).json({
+            message: `user with the the id ${user._id} has been deleted`,
+          });
         }
       })
       .catch((err) => {
