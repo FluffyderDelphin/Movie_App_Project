@@ -5,7 +5,7 @@
 
 ## What does this Api do? 
 This Api is storing Information about Movies and Users into a MongoDB Databank. 
-It is able to authenticate with JWT Tokens and hash Users Passwords
+It is able to authenticate "Users" with JWT Tokens and hash the  Users Passwords
 
 
 ## Tech Used 
