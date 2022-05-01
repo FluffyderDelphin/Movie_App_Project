@@ -87,13 +87,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 /**
  * @swagger
  * /movies:
- *  get:
- *     description:Get Movies List
- *     responses:
- *        '200':
- *           description: A sucsessful Respone
- *
- *
+ * get:
+ *  description: Request for Movies List
+ *  responses:
+ *    '200':
+ *       description: Sucsessful Response
  */
 app.get(
   '/movies',
