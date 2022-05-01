@@ -110,17 +110,29 @@ app.get(
 
 /**
  * @swagger
- * /movies/{title}:
+ * /movies/:title:
  *  get:
- *    summary: Request for a single Movie
+ *    summary: get Movie by Title
  *    parameters:
- *       - name: title
- *        in: path
+ *      - in: path
+ *        name: title
  *        required: true
- *        description: Title of Movie to get
+ *        description: title of the targeted movie
+ *      - in: header
+ *        name: Authorization
+ *        description: Bearer JWT token
  *    responses:
+ *       '500':
+ *          description: Error getting movie
  *       '200':
- *         description: A Movie Object
+ *          description: Movie Object is returned
+ *          examples:
+ *            application/json:
+ *              _id: "asdas08d12083180qs89das"
+ *              title: "Hunt for the Wilderpeople"
+ *              email: "asd@asd.com"
+ *              birthday: "10-10-2000"
+ *              favMovies: []
  */
 
 // Get Data About Movie by Title
@@ -246,6 +258,43 @@ app.get(
       });
   }
 );
+
+/**
+ * @swagger
+ * /users/:username:
+ *  post:
+ *    summary: Update user details by username
+ *    parameters:
+ *      - in: path
+ *        name: username
+ *        required: true
+ *        description: username of the targeted user object
+ *      - in: header
+ *        name: Authorization
+ *        description: Bearer JWT token
+ *      - in: body
+ *        description: user object, new data for update
+ *        example:
+ *          username: "Hamza123"
+ *          password: "123123123"
+ *          email: "asd@asd.com"
+ *          birthday: "10-10-2000"
+ *    responses:
+ *       '500':
+ *          description: user update failed
+ *       '403':
+ *          description: no valid bearer token provided
+ *       '200':
+ *          description: The updated user object
+ *          examples:
+ *            application/json:
+ *              _id: "asdas08d12083180qs89das"
+ *              username: "Hamza123"
+ *              email: "asd@asd.com"
+ *              birthday: "10-10-2000"
+ *              favMovies: []
+ */
+
 // Change User Info by Name
 app.put(
   '/users/:username',
