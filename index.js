@@ -87,11 +87,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 /**
  * @swagger
  * /movies:
- * get:
- *  description: Request for Movies List
- *  responses:
- *    '200':
- *       description: Sucsessful Response
+ *  get:
+ *    summary:: Request for Movies Array
+ *    responses:
+ *       '200':
+ *         description: A Movies Array
  */
 app.get(
   '/movies',
@@ -107,6 +107,21 @@ app.get(
       });
   }
 );
+
+/**
+ * @swagger
+ * /movies/{title}:
+ *  get:
+ *    summary: Request for a single Movie
+ *    parameters:
+ *       - name: title
+ *        in: path
+ *        required: true
+ *        description: Title of Movie to get
+ *    responses:
+ *       '200':
+ *         description: A Movie Object
+ */
 
 // Get Data About Movie by Title
 app.get(
