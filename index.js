@@ -87,7 +87,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 /** 
 /*  @swagger 
 /*  /movies:
-/*  get:
+/*    get:
 /*     description: Get Movie list
 /*     responses: 
 /*       '200':
