@@ -78,7 +78,7 @@ const swaggerOptions = {
       servers: ['http://localhost:8080'],
     },
   },
-  apis: ['index.js'],
+  apis: ['index.js', 'auth.js'],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
@@ -88,10 +88,27 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  * @swagger
  * /movies:
  *  get:
- *    summary:: Request for Movies Array
+ *    summary: get List of Movies
  *    responses:
+ *       '500':
+ *          description: Error getting movies
  *       '200':
- *         description: A Movies Array
+ *          description: Array of Movies is returned
+ *          examples:
+ *            application/json:
+ *              _id: "asdas08d12083180qs89das"
+ *              title: "Hunt for the Wilderpeople"
+ *              imgeurl: "https://picsum.photos/230/300?random=3"
+ *              description: "this movie is...."
+ *              genre: {
+ *                    name:"genre",
+ *                    description:"this genre is..."
+ *               }
+ *              director: {
+ *                     name:"directorname"
+ *                      bio:"this guy"
+ *                      birth:"1975-08-16"
+ *              }
  */
 app.get(
   '/movies',
@@ -130,9 +147,19 @@ app.get(
  *            application/json:
  *              _id: "asdas08d12083180qs89das"
  *              title: "Hunt for the Wilderpeople"
- *              email: "asd@asd.com"
- *              birthday: "10-10-2000"
- *              favMovies: []
+ *              imgeurl: "https://picsum.photos/230/300?random=3"
+ *              description: "this movie is...."
+ *              genre: {
+ *                    name:"genre",
+ *                    description:"this genre is..."
+ *               }
+ *              director: {
+ *                     name:"directorname"
+ *                      bio:"this guy"
+ *                      birth:"1975-08-16"
+ *              }
+ *
+ *
  */
 
 // Get Data About Movie by Title
@@ -150,6 +177,35 @@ app.get(
       });
   }
 );
+
+/**
+ * @swagger
+ * /movies/genres/:genrename:
+ *  get:
+ *    summary: get genre by Genre Name
+ *    parameters:
+ *      - in: path
+ *        name: genrename
+ *        required: true
+ *        description: genrename of targeted genre
+ *      - in: header
+ *        name: Authorization
+ *        description: Bearer JWT token
+ *    responses:
+ *       '500':
+ *          description: Error getting genre
+ *       '200':
+ *          description: Genre Object returned
+ *          examples:
+ *            application/json:
+ *              genre: {
+ *                    name:"genre",
+ *                    description:"this genre is..."
+ *               }
+ *
+ *
+ */
+
 // Get Data about Genre
 app.get(
   '/movies/genres/:genrename',
@@ -165,6 +221,36 @@ app.get(
       });
   }
 );
+
+/**
+ * @swagger
+ * /movies/directors/:director:
+ *  get:
+ *    summary: get Director by directorname
+ *    parameters:
+ *      - in: path
+ *        name: director
+ *        required: true
+ *        description: directornameof targeted director
+ *      - in: header
+ *        name: Authorization
+ *        description: Bearer JWT token
+ *    responses:
+ *       '500':
+ *          description: Error getting Director
+ *       '200':
+ *          description: Director Object Returned
+ *          examples:
+ *            application/json:
+ *              director: {
+ *                     name:"directorname"
+ *                      bio:"this guy"
+ *                      birth:"1975-08-16"
+ *              }
+ *
+ *
+ */
+
 // Get Director Data
 app.get(
   '/movies/directors/:director',
@@ -180,6 +266,35 @@ app.get(
       });
   }
 );
+
+/**
+ * @swagger
+ * /users
+ *  post:
+ *    summary: Adding User with given Object
+ *      - in: body
+ *        description: user object, new data for update
+ *        example:
+ *          username: "Hamza123"
+ *          password: "123123123"
+ *          email: "asd@asd.com"
+ *          birthday: "10-10-2000"
+ *    responses:
+ *       '500':
+ *          description: user update failed
+ *       '403':
+ *          description: no valid bearer token provided
+ *       '200':
+ *          description: The new user object with generated id
+ *          examples:
+ *            application/json:
+ *              _id: "asdas08d12083180qs89das"
+ *              username: "Hamza123"
+ *              email: "asd@asd.com"
+ *              birthday: "10-10-2000"
+ *              favMovies: []
+ */
+
 // Add User
 app.post(
   '/users',
@@ -227,6 +342,28 @@ app.post(
       });
   }
 );
+
+/**
+ * @swagger
+ * /users
+ *  get:
+ *    summary: get list of Users
+ *    responses:
+ *       '500':
+ *          description: Error getting movie
+ *       '200':
+ *          description: Movie Object is returned
+ *          examples:
+ *            application/json:
+ *              _id: "asdas08d12083180qs89das"
+ *              username: "Hamza123"
+ *              email: "asd@asd.com"
+ *              birthday: "10-10-2000"
+ *              favMovies: []
+ *
+ *
+ */
+
 // Read User Data
 app.get(
   '/users',
@@ -242,6 +379,35 @@ app.get(
       });
   }
 );
+
+/**
+ * @swagger
+ * /users/:username:
+ *  get:
+ *    summary: get list of Users
+ *    parameters:
+ *      - in: path
+ *        name: username
+ *        required: true
+ *        description: title of the targeted movie
+ *      - in: header
+ *        name: Authorization
+ *        description: Bearer JWT token
+ *    responses:
+ *       '500':
+ *          description: Error getting movie
+ *       '200':
+ *          description: Movie Object is returned
+ *          examples:
+ *            application/json:
+ *              _id: "asdas08d12083180qs89das"
+ *              username: "Hamza123"
+ *              email: "asd@asd.com"
+ *              birthday: "10-10-2000"
+ *              favMovies: []
+ *
+ */
+
 // Read User by Name
 
 app.get(
