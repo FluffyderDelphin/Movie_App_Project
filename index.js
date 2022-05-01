@@ -84,15 +84,17 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-/** 
-/*  @swagger 
-/*  /movies:
-/*    get:
-/*     description: Get Movie list
-/*     responses: 
-/*       '200':
-/*            description: A sucessful Response
-*/
+/**
+ * @swagger
+ * /movies:
+ *  get:
+ *     description:Get Movies List
+ *     responses:
+ *        '200':
+ *           description: A sucsessful Respone
+ *
+ *
+ */
 app.get(
   '/movies',
   passport.authenticate('jwt', { session: false }),
