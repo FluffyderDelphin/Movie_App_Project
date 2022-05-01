@@ -3,6 +3,7 @@ const express = require('express'),
   mongoose = require('mongoose'),
   models = require('./mongoose_models/models.js');
 const bodyParser = require('body-parser');
+
 // const uuid = require('uuid');
 
 // Declaring Exportet Mongoose Models
@@ -63,6 +64,35 @@ require('./auth')(app);
 //   }
 // );
 
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'Movie App',
+      description: 'Movie App Information',
+      contact: {
+        name: 'Alexander Ulrich ',
+      },
+      servers: ['https://alexandersmovieapp.herokuapp.com/'],
+    },
+  },
+  apis: ['index.js'],
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+/** 
+/*  @swagger 
+/*  /Movies:
+/*  get:
+/*  description: Get Movie list
+/*  responses: 
+/*  '200':
+/*   description: A sucessful Response
+*/
 app.get(
   '/movies',
   passport.authenticate('jwt', { session: false }),
