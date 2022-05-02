@@ -13,6 +13,8 @@ It is able to authenticate "Users" with JWT Tokens and hash the  Users Passwords
 - Node.js
 - Express.js
 - MongoDB
+- Token Based Authentication (JWT)
+- Swagger
 
 ## Dependencies installed 
 
