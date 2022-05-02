@@ -269,27 +269,18 @@ app.get(
 
 /**
  * @swagger
- * /users
+ * /users:
  *  post:
- *    summary: Adding User with given Object
- *      - in: body
- *        description: user object, new data for update
- *        example:
- *          username: "Hamza123"
- *          password: "123123123"
- *          email: "asd@asd.com"
- *          birthday: "10-10-2000"
+ *    summary: Post new User Object
  *    responses:
  *       '500':
  *          description: user update failed
- *       '403':
- *          description: no valid bearer token provided
  *       '200':
- *          description: The new user object with generated id
+ *          description: Posted user object
  *          examples:
  *            application/json:
  *              _id: "asdas08d12083180qs89das"
- *              username: "Hamza123"
+ *              username: "Test123"
  *              email: "asd@asd.com"
  *              birthday: "10-10-2000"
  *              favMovies: []
@@ -345,12 +336,14 @@ app.post(
 
 /**
  * @swagger
- * /users
+ * /users:
  *  get:
  *    summary: get list of Users
  *    responses:
  *       '500':
  *          description: Error getting movie
+ *       '403':
+ *          description: no valid bearer token provided
  *       '200':
  *          description: Movie Object is returned
  *          examples:
@@ -384,7 +377,7 @@ app.get(
  * @swagger
  * /users/:username:
  *  get:
- *    summary: get list of Users
+ *    summary: data of one User
  *    parameters:
  *      - in: path
  *        name: username
@@ -395,13 +388,15 @@ app.get(
  *        description: Bearer JWT token
  *    responses:
  *       '500':
- *          description: Error getting movie
+ *          description: Error getting user
+ *       '403':
+ *          description: no valid bearer token provided
  *       '200':
- *          description: Movie Object is returned
+ *          description: User Object is returned
  *          examples:
  *            application/json:
  *              _id: "asdas08d12083180qs89das"
- *              username: "Hamza123"
+ *              username: "Test123"
  *              email: "asd@asd.com"
  *              birthday: "10-10-2000"
  *              favMovies: []
@@ -428,7 +423,7 @@ app.get(
 /**
  * @swagger
  * /users/:username:
- *  post:
+ *  put:
  *    summary: Update user details by username
  *    parameters:
  *      - in: path
@@ -455,7 +450,7 @@ app.get(
  *          examples:
  *            application/json:
  *              _id: "asdas08d12083180qs89das"
- *              username: "Hamza123"
+ *              username: "Test123"
  *              email: "asd@asd.com"
  *              birthday: "10-10-2000"
  *              favMovies: []
@@ -489,6 +484,38 @@ app.put(
     );
   }
 );
+
+/**
+ * @swagger
+ * /users/:username:/favorites/add/:movieID:
+ *  put:
+ *    summary: Add Movie from Users List of Favorites
+ *    parameters:
+ *      - in: path
+ *        name: username,movieId
+ *        required: true
+ *        description: username of the targeted user object and MovieID of Movie to add
+ *      - in: header
+ *        name: Authorization
+ *        description: Bearer JWT token
+ *    responses:
+ *       '500':
+ *          description: adding to Favorites has failed
+ *       '403':
+ *          description: no valid bearer token provided
+ *       '200':
+ *          description: The updated user object
+ *          examples:
+ *            application/json:
+ *              _id: "asdas08d12083180qs89das"
+ *              username: "Test23"
+ *              email: "asd@asd.com"
+ *              birthday: "10-10-2000"
+ *              favMovies: [
+ *                  _id:"SSAFWW671300763"
+ *              ]
+ */
+
 // Adding Movie to Users List of Favorites
 app.put(
   '/users/:username/favorites/add/:movieID',
@@ -513,6 +540,36 @@ app.put(
     );
   }
 );
+
+/**
+ * @swagger
+ * /users/:username:/favorites/add/:movieID:
+ *  put:
+ *    summary: Removes Movie from Users List of Favorites
+ *    parameters:
+ *      - in: path
+ *        name: username,movieId
+ *        required: true
+ *        description: username of the targeted user object and MovieID of Movie to remove
+ *      - in: header
+ *        name: Authorization
+ *        description: Bearer JWT token
+ *    responses:
+ *       '500':
+ *          description: removing from Favorites has failed
+ *       '403':
+ *          description: no valid bearer token provided
+ *       '200':
+ *          description: The updated user object
+ *          examples:
+ *            application/json:
+ *              _id: "asdas08d12083180qs89das"
+ *              username: "Hamza123"
+ *              email: "asd@asd.com"
+ *              birthday: "10-10-2000"
+ *              favMovies: []
+ */
+
 // Remove Favorite
 app.put(
   '/users/:username/favorites/remove/:movieID',
@@ -534,6 +591,29 @@ app.put(
     );
   }
 );
+
+/**
+ * @swagger
+ * /users/:userId:
+ *  delete:
+ *    summary: Add Movie from Users List of Favorites
+ *    parameters:
+ *      - in: path
+ *        name: userId
+ *        required: true
+ *        description: userdID of the User to be deleted
+ *      - in: header
+ *        name: Authorization
+ *        description: Bearer JWT token
+ *    responses:
+ *       '500':
+ *          description: removing the User has failed
+ *       '403':
+ *          description: no valid bearer token provided
+ *       '200':
+ *          description: 'User with the ID [userID] deleted'
+ */
+
 // Remove User
 app.delete(
   '/users/:userId',
