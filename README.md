@@ -2,6 +2,7 @@
  
 - Link to the Documentation:  https://fluffyderdelphin.github.io/Movie_App_Project/public/documentation.html
 - Link to the Heroku API : https://alexandersmovieapp.herokuapp.com/
+- Link to Apu Documentation: https://alexandersmovieapp.herokuapp.com/api-docs/
 
 ## What does this Api do? 
 This Api is storing Information about Movies and Users into a MongoDB Databank. 
