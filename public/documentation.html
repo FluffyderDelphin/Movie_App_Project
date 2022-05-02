@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Movie API</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Movie API</h1>
-    <P>This API is supposed to provide Information about diffrent Movies, directors and genres.
-        The user will be able to sign up, update their Information and create a List of their favorite movies.
-    </P>
-    
+    <p>
+      This API is supposed to provide Information about diffrent Movies,
+      directors and genres. The user will be able to sign up, update their
+      Information and create a List of their favorite movies.
+    </p>
 
     <h2>Api Endpoints Table</h2>
     <table>
-        <tr>
-            <th>Name (Url)</th>
-            <th>Http Method</th>
-            <th>Parameter</th>
-            <th>Request Format</th>
-            <th>Response Format</th>
-            <th>Description</th>
-            <th>Authentication</th>
-        </tr>
-        <tr>
-            <td>http://localhost:8080/movies</td>
-            <td>GET</td>
-            <td>none</td>
-            <td>none</td>
-            <td>Json Object with a list of Movies<br>
-             <pre><code>
+      <tr>
+        <th>Name (Url)</th>
+        <th>Description</th>
+        <th>Http Method</th>
+        <th>Parameter</th>
+        <th>Request Format</th>
+        <th>Response Format</th>
+        <th>Authentication</th>
+      </tr>
+      <tr>
+        <!-- Get Movie list Row -->
+        <td>http://localhost:8080/movies</td>
+        <td>Returns a list of Movies from the Database</td>
+        <td>GET</td>
+        <td>none</td>
+        <td>none</td>
+        <td>
+          Json Object with a list of Movies<br />
+          <pre><code>
  [
     {
         "genre": {
@@ -55,17 +59,19 @@
     },....
  ]
             </code></pre>
-            </td>
-            <td>Returns a list of Movies from the Database</td>
-            <td>Needs Beared Token(Jwt)</td>
-        </tr>
-        <tr>
-            <td>http://localhost:8080/movies/[:title]</td>
-            <td>GET</td>
-            <td>title</td>
-            <td>none</td>
-            <td>Json Object with Data about a single Movie <br>
-                <pre><code>    
+        </td>
+        <td>Needs Beared Token(Jwt)</td>
+      </tr>
+      <!-- Get Movie Row -->
+      <tr>
+        <td>http://localhost:8080/movies/[:title]</td>
+        <td>Returns a Detailed Description about specified Movietitle</td>
+        <td>GET</td>
+        <td>title</td>
+        <td>none</td>
+        <td>
+          Json Object with Data about a single Movie <br />
+          <pre><code>    
 {
     "genre": {
         "name": "comedy",
@@ -81,51 +87,54 @@
     "description": "During the collapse of ..."
 }
     </code></pre>
-            
-            </td>
-            <td>Returns a Detailed Description about specified Movietitle</td>
-            <td>Needs Beared Token(Jwt)</td>
-        </tr>
-        <!-- Get Genre Row -->
-        <tr>
-            <td>http://localhost:8080/movies/genres/[:genrename]</td>
-            <td>GET</td>
-            <td>genrename</td>
-            <td>none</td>
-            <td> String with the genre Description: <br>
-                Example: <br>
-               ' Comedy is a genre of film in which...'
-            </td>
-            <td>Returns the Genre Description about the specified Movie</td>
-            <td>Needs Beared Token(Jwt)</td>
-        </tr>
-        <!-- Get Director User Row -->
-        <tr>
-            <td>http://localhost:8080/movies/directors/[:director]</td>
-            <td>GET</td>
-            <td>director</td>
-            <td>none</td>
-            <td>Json Object with Description about the Director of  the specified Movie<br>
-                Example: <br>
-              <pre><code>
+        </td>
+        <td>Needs Beared Token(Jwt)</td>
+      </tr>
+      <!-- Get Genre Row -->
+      <tr>
+        <td>http://localhost:8080/movies/genres/[:genrename]</td>
+        <td>Returns the Genre Description about the specified Movie</td>
+        <td>GET</td>
+        <td>genrename</td>
+        <td>none</td>
+        <td>
+          String with the genre Description: <br />
+          Example: <br />
+          ' Comedy is a genre of film in which...'
+        </td>
+        <td>Needs Beared Token(Jwt)</td>
+      </tr>
+      <!-- Get Director User Row -->
+      <tr>
+        <td>http://localhost:8080/movies/directors/[:director]</td>
+        <td>Returns the Director´s Details of a specified Movie</td>
+        <td>GET</td>
+        <td>director</td>
+        <td>none</td>
+        <td>
+          Json Object with Description about the Director of the specified
+          Movie<br />
+          Example: <br />
+          <pre><code>
     {
         "name": "Taika Waititi",
         "bio": "Taika Waititi film and television director,...",
         "birth": "1975-08-16"
     }
 </code></pre>
-            </td>
-            <td>Returns the Director´s Details of  a specified Movie</td>
-            <td>Needs Beared Token(Jwt)</td>
-        </tr>
-        <!-- Register User Row -->
-        <tr>
-            <td>http://localhost:8080/users</td>
-            <td>POST</td>
-            <td>none</td>
-            <td>Json Object with Users Registration  Info <br>
-                Example: <br>                
-                <pre><code>
+        </td>
+        <td>Needs Beared Token(Jwt)</td>
+      </tr>
+      <!-- Register User Row -->
+      <tr>
+        <td>http://localhost:8080/users</td>
+        <td>Adds User Registration Info to the Websites Userlist</td>
+        <td>POST</td>
+        <td>none</td>
+        <td>
+          Json Object with Users Registration Info <br />
+          Example: <br />
+          <pre><code>
     {
         "username":"Example",
         "password":"555555",
@@ -133,10 +142,12 @@
         "birthday":"1999-02-022",
     }
   </code></pre>
-            </td>
-            <td>Json Object that returns the newly registerd User Info with randomly genreated ID <br>
-                Example: <br>
-<pre><code>
+        </td>
+        <td>
+          Json Object that returns the newly registerd User Info with randomly
+          genreated ID <br />
+          Example: <br />
+          <pre><code>
     {
         "_id":"448869368723146"
         "username":"Example",
@@ -146,20 +157,20 @@
         "favMovies":[]
     }
 </code></pre>
-            </td>
-            <td>Adds User Registration Info to the Websites Userlist</td>
-            <td>none</td>
-        </tr>
-        <!-- Get User list Row -->
-        <tr>
-            <td>http://localhost:8080/users</td>
-            <td>GET</td>
-            <td>none</td>
-            <td> none
-            </td>
-            <td>List of JSON User Objects<br>
-                Example: <br>
-<pre><code>
+        </td>
+        <td>none</td>
+      </tr>
+      <!-- Get User list Row -->
+      <tr>
+        <td>http://localhost:8080/users</td>
+        <td>Gets list of Users</td>
+        <td>GET</td>
+        <td>none</td>
+        <td>none</td>
+        <td>
+          List of JSON User Objects<br />
+          Example: <br />
+          <pre><code>
  [   
  {
         "_id":"448869368723146"
@@ -174,20 +185,20 @@
     }
     ...]
 </code></pre>
-            </td>
-            <td>Gets list of Users</td>
-            <td>Needs Beared Token(Jwt)</td>
-        </tr>
- <!-- Get single User Data -->
-        <tr>
-            <td>http://localhost:8080/users/[:username]</td>
-            <td>GET</td>
-            <td>none</td>
-            <td> username
-            </td>
-            <td>List of JSON User Objects<br>
-                Example: <br>
-<pre><code>
+        </td>
+        <td>Needs Beared Token(Jwt)</td>
+      </tr>
+      <!-- Get single User Data -->
+      <tr>
+        <td>http://localhost:8080/users/[:username]</td>
+        <td>Gets Data of a single User by Name</td>
+        <td>GET</td>
+        <td>none</td>
+        <td>username</td>
+        <td>
+          List of JSON User Objects<br />
+          Example: <br />
+          <pre><code>
  [   
  {
         "_id":"448869368723146"
@@ -202,26 +213,29 @@
     }
     ...]
 </code></pre>
-            </td>
-            <td>Gets a singel Users Data</td>
-            <td>Needs Beared Token(Jwt)</td>
-        </tr>
-        <!-- Update User Row -->
-        <tr>
-            <td>http://localhost:8080/users/[:username]</td>
-            <td>PUT</td>
-            <td>username</td>
-            <td>  Json Data with Data to Update <br> 
-     <pre><code>
+        </td>
+        <td>Needs Beared Token(Jwt)</td>
+      </tr>
+      <!-- Update User Row -->
+      <tr>
+        <td>http://localhost:8080/users/[:username]</td>
+        <td>Changes Users Data by Username</td>
+        <td>PUT</td>
+        <td>username</td>
+        <td>
+          Json Data with Data to Update <br />
+          <pre><code>
         {
         "username":"Example New",
         "password":"555555",
         "email":"examplemail@,com",
         "birthday":"1999-02-022"
         }
-            </code></pre></td>
-            <td>Json Data with Updated Profile<br>
-                <pre><code>
+            </code></pre>
+        </td>
+        <td>
+          Json Data with Updated Profile<br />
+          <pre><code>
         {   
             "_id":"448869368723146"
             "username":"Example New",
@@ -229,18 +243,19 @@
             "email":"examplemail@,com",
             "birthday":"1999-02-022"
         }
-            </code></pre></td>
-            <td>Changes Users Data by Username</td>
-            <td>Needs Beared Token(Jwt)</td>
-        </tr>
-        <!-- Update Fav Movie Row -->
-        <tr>
-            <td>http://localhost:8080/users/[username]/favorites/add/[movieID]</td>
-            <td>PUT</td>
-            <td>username,movieID</td>
-            <td>none</td>
-            <td>
-        <pre><code>
+            </code></pre>
+        </td>
+        <td>Needs Beared Token(Jwt)</td>
+      </tr>
+      <!-- Update Fav Movie Row -->
+      <tr>
+        <td>http://localhost:8080/users/[username]/favorites/add/[movieID]</td>
+        <td>Adds Movie to the Favorites List in the User Profile.</td>
+        <td>PUT</td>
+        <td>username,movieID</td>
+        <td>none</td>
+        <td>
+          <pre><code>
             {
                 "_id":"448869368723146"
                 "username":"Example",
@@ -250,18 +265,20 @@
                 "favMovies":[addedMovieID]
             }
         </code></pre>
-</td>
-            <td>Adds Movie to the Favorites List in the User Profile.</td>
-            <td>Needs Beared Token(Jwt)</td>
-        </tr>
-        <!-- Remove Fav Movie Row -->
-        <tr>
-            <td>http://localhost:8080/users/[:username]/favorites/remove/[:movieID]</td>
-            <td>PUT</td>
-            <td>username,movieID</td>
-            <td>none</td>
-            <td>
-<pre><code>
+        </td>
+        <td>Needs Beared Token(Jwt)</td>
+      </tr>
+      <!-- Remove Fav Movie Row -->
+      <tr>
+        <td>
+          http://localhost:8080/users/[:username]/favorites/remove/[:movieID]
+        </td>
+        <td>Deletes Movie from the Favorite List</td>
+        <td>PUT</td>
+        <td>username,movieID</td>
+        <td>none</td>
+        <td>
+          <pre><code>
     {
         "_id":"448869368723146"
         "username":"Example",
@@ -271,33 +288,39 @@
         "favMovies":[addedMovieID]
     }
 </code></pre>
-            </td>
-            <td>Deletes Movie from the Favorite List</td>
-            <td>Needs Beared Token(Jwt)</td>
-        </tr>
-        <!-- Delete User Row -->
-        <tr>
-            <td>http://localhost:8080/users/[:userId]</td>
-            <td>DELETE</td>
-            <td>userId</td>
-            <td>none</td>
-            <td>'User with the ID: [:userId] deleted'</td>
-            <td>Deletes User</td>
-            <td>Needs Bearer Token(Jwt)</td>
-        </tr>
-        <tr>
-            <td>http://localhost:8080/login</td>
-            <td>POST</td>
-            <td>username,password</td>
-            <td>
- <pre><code>
+        </td>
+        <td>Needs Beared Token(Jwt)</td>
+      </tr>
+      <!-- Delete User Row -->
+      <tr>
+        <td>http://localhost:8080/users/[:userId]</td>
+        <td>Deletes User</td>
+        <td>DELETE</td>
+        <td>userId</td>
+        <td>none</td>
+        <td>'User with the ID: [:userId] deleted'</td>
+        <td>Needs Bearer Token(Jwt)</td>
+      </tr>
+      <tr>
+        <!-- Login User Row -->
+        <td>http://localhost:8080/login</td>
+        <td>
+          Gives the User a JWT Token upon login in, that enables the use of the
+          other Crud Operations. Login Data will be send trough parameters or
+          the Request Body
+        </td>
+        <td>POST</td>
+        <td>username,password</td>
+        <td>
+          <pre><code>
 {
     "username": "Test",
     "password": "123"
 }
-            </code></pre></td>
-            <td>
- <pre><code>
+            </code></pre>
+        </td>
+        <td>
+          <pre><code>
 {
     "user": {
         "_id": "61b47bd72b4e653bbe77e7f3",
@@ -312,12 +335,8 @@
 }
             </code></pre>
         </td>
-            <td>Gives the User a JWT Token upon login in, that enables the use of the other Crud Operations.
-                Login Data will be send trough parameters or the Request Body
-            </td>
-            <td>Basic Http authentication that requires password and username</td>
-        </tr>
+        <td>Basic Http authentication that requires password and username</td>
+      </tr>
     </table>
-
-</body>
+  </body>
 </html>
