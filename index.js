@@ -11,15 +11,15 @@ const Movies = models.Movies;
 const Users = models.Users;
 
 // Connecting to MongoDB Database
-mongoose.connect('mongodb://localhost:27017/appdb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-// mongoose.connect(process.env.CONNECTION_URI, {
+// mongoose.connect('mongodb://localhost:27017/appdb', {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
 // });
+
+mongoose.connect(process.env.CONNECTION_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const app = express();
 app.use(morgan('common'));
@@ -75,7 +75,7 @@ const swaggerOptions = {
       contact: {
         name: 'Alexander Ulrich ',
       },
-      servers: ['http://localhost:8080'],
+      servers: ['https://alexandersmovieapp.herokuapp.com'],
     },
   },
   apis: ['index.js', 'auth.js'],
