@@ -14,7 +14,7 @@ It is able to authenticate "Users" with JWT Tokens and hash the  Users Passwords
 - Express.js
 - MongoDB
 - Token Based Authentication (JWT)
-- Swagger
+- Swagger-JSDoc
 
 ## Dependencies installed 
 
