@@ -18,8 +18,8 @@
     <h2>Api Endpoints Table</h2>
     <table>
       <tr>
-        <th>Name (Url)</th>
         <th>Description</th>
+        <th>Name (Url)</th>
         <th>Http Method</th>
         <th>Parameter</th>
         <th>Request Format</th>
@@ -28,8 +28,8 @@
       </tr>
       <tr>
         <!-- Get Movie list Row -->
-        <td>http://localhost:8080/movies</td>
         <td>Returns a list of Movies from the Database</td>
+        <td>http://localhost:8080/movies</td>
         <td>GET</td>
         <td>none</td>
         <td>none</td>
@@ -64,8 +64,8 @@
       </tr>
       <!-- Get Movie Row -->
       <tr>
-        <td>http://localhost:8080/movies/[:title]</td>
         <td>Returns a Detailed Description about specified Movietitle</td>
+        <td>http://localhost:8080/movies/[:title]</td>
         <td>GET</td>
         <td>title</td>
         <td>none</td>
@@ -92,8 +92,8 @@
       </tr>
       <!-- Get Genre Row -->
       <tr>
-        <td>http://localhost:8080/movies/genres/[:genrename]</td>
         <td>Returns the Genre Description about the specified Movie</td>
+        <td>http://localhost:8080/movies/genres/[:genrename]</td>
         <td>GET</td>
         <td>genrename</td>
         <td>none</td>
@@ -106,8 +106,8 @@
       </tr>
       <!-- Get Director User Row -->
       <tr>
-        <td>http://localhost:8080/movies/directors/[:director]</td>
         <td>Returns the Director´s Details of a specified Movie</td>
+        <td>http://localhost:8080/movies/directors/[:director]</td>
         <td>GET</td>
         <td>director</td>
         <td>none</td>
@@ -127,8 +127,8 @@
       </tr>
       <!-- Register User Row -->
       <tr>
-        <td>http://localhost:8080/users</td>
         <td>Adds User Registration Info to the Websites Userlist</td>
+        <td>http://localhost:8080/users</td>
         <td>POST</td>
         <td>none</td>
         <td>
@@ -162,8 +162,8 @@
       </tr>
       <!-- Get User list Row -->
       <tr>
-        <td>http://localhost:8080/users</td>
         <td>Gets list of Users</td>
+        <td>http://localhost:8080/users</td>
         <td>GET</td>
         <td>none</td>
         <td>none</td>
@@ -190,8 +190,8 @@
       </tr>
       <!-- Get single User Data -->
       <tr>
-        <td>http://localhost:8080/users/[:username]</td>
         <td>Gets Data of a single User by Name</td>
+        <td>http://localhost:8080/users/[:username]</td>
         <td>GET</td>
         <td>none</td>
         <td>username</td>
@@ -218,8 +218,8 @@
       </tr>
       <!-- Update User Row -->
       <tr>
-        <td>http://localhost:8080/users/[:username]</td>
         <td>Changes Users Data by Username</td>
+        <td>http://localhost:8080/users/[:username]</td>
         <td>PUT</td>
         <td>username</td>
         <td>
@@ -249,8 +249,8 @@
       </tr>
       <!-- Update Fav Movie Row -->
       <tr>
-        <td>http://localhost:8080/users/[username]/favorites/add/[movieID]</td>
         <td>Adds Movie to the Favorites List in the User Profile.</td>
+        <td>http://localhost:8080/users/[username]/favorites/add/[movieID]</td>
         <td>PUT</td>
         <td>username,movieID</td>
         <td>none</td>
@@ -270,10 +270,10 @@
       </tr>
       <!-- Remove Fav Movie Row -->
       <tr>
+        <td>Deletes Movie from the Favorite List</td>
         <td>
           http://localhost:8080/users/[:username]/favorites/remove/[:movieID]
         </td>
-        <td>Deletes Movie from the Favorite List</td>
         <td>PUT</td>
         <td>username,movieID</td>
         <td>none</td>
@@ -293,12 +293,15 @@
       </tr>
       <!-- Delete User Row -->
       <tr>
-        <td>http://localhost:8080/users/[:userId]</td>
         <td>Deletes User</td>
+        <td>http://localhost:8080/users/[:userId]</td>
         <td>DELETE</td>
         <td>userId</td>
         <td>none</td>
-        <td>'User with the ID: [:userId] deleted'</td>
+        <td>
+          Json Object with Message
+          <pre><code> {message 'User with the ID: [:userId] deleted'}</code></pre>
+        </td>
         <td>Needs Bearer Token(Jwt)</td>
       </tr>
       <tr>

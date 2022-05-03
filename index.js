@@ -93,7 +93,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *       '500':
  *          description: Error getting movies
  *       '200':
- *          description: Array of Movies is returned
+ *          description: Array of Movies is returned, example shows object inside this Array
  *          examples:
  *            application/json:
  *              _id: "asdas08d12083180qs89das"
@@ -191,18 +191,12 @@ app.get(
  *      - in: header
  *        name: Authorization
  *        description: Bearer JWT token
+ *        required: true
  *    responses:
  *       '500':
  *          description: Error getting genre
  *       '200':
- *          description: Genre Object returned
- *          examples:
- *            application/json:
- *              genre: {
- *                    name:"genre",
- *                    description:"this genre is..."
- *               }
- *
+ *          description: Genre description string returned
  *
  */
 
@@ -235,6 +229,7 @@ app.get(
  *      - in: header
  *        name: Authorization
  *        description: Bearer JWT token
+ *        required: true
  *    responses:
  *       '500':
  *          description: Error getting Director
@@ -242,11 +237,9 @@ app.get(
  *          description: Director Object Returned
  *          examples:
  *            application/json:
- *              director: {
- *                     name:"directorname"
- *                      bio:"this guy"
- *                      birth:"1975-08-16"
- *              }
+ *              name: "directorname"
+ *              bio: "this guy"
+ *              birth: "1975-08-16"
  *
  *
  */
@@ -272,6 +265,14 @@ app.get(
  * /users:
  *  post:
  *    summary: Post new User Object
+ *    parameters:
+ *      - in: body
+ *        description: user object, new data for update
+ *        example:
+ *          username: "Hamza123"
+ *          password: "123123123"
+ *          email: "asd@asd.com"
+ *          birthday: "10-10-2000"
  *    responses:
  *       '500':
  *          description: user update failed
@@ -339,13 +340,18 @@ app.post(
  * /users:
  *  get:
  *    summary: get list of Users
+ *    parameters:
+ *      - in: header
+ *        name: Authorization
+ *        description: Bearer JWT token
+ *        required: true
  *    responses:
  *       '500':
- *          description: Error getting movie
+ *          description: Error getting Users
  *       '403':
  *          description: no valid bearer token provided
  *       '200':
- *          description: Movie Object is returned
+ *          description: An array of user objects (example contains an object in that array)
  *          examples:
  *            application/json:
  *              _id: "asdas08d12083180qs89das"
@@ -386,6 +392,7 @@ app.get(
  *      - in: header
  *        name: Authorization
  *        description: Bearer JWT token
+ *        required: true
  *    responses:
  *       '500':
  *          description: Error getting user
@@ -433,6 +440,7 @@ app.get(
  *      - in: header
  *        name: Authorization
  *        description: Bearer JWT token
+ *        required: true
  *      - in: body
  *        description: user object, new data for update
  *        example:
@@ -498,6 +506,7 @@ app.put(
  *      - in: header
  *        name: Authorization
  *        description: Bearer JWT token
+ *        required: true
  *    responses:
  *       '500':
  *          description: adding to Favorites has failed
@@ -554,6 +563,7 @@ app.put(
  *      - in: header
  *        name: Authorization
  *        description: Bearer JWT token
+ *        required: true
  *    responses:
  *       '500':
  *          description: removing from Favorites has failed
@@ -596,7 +606,7 @@ app.put(
  * @swagger
  * /users/:userId:
  *  delete:
- *    summary: Add Movie from Users List of Favorites
+ *    summary: de-register user account
  *    parameters:
  *      - in: path
  *        name: userId
@@ -605,13 +615,17 @@ app.put(
  *      - in: header
  *        name: Authorization
  *        description: Bearer JWT token
+ *        required: true
  *    responses:
  *       '500':
  *          description: removing the User has failed
  *       '403':
  *          description: no valid bearer token provided
  *       '200':
- *          description: 'User with the ID [userID] deleted'
+ *          description: The updated user object
+ *          examples:
+ *            application/json:
+ *              message: 'User with the ID [userID] deleted'
  */
 
 // Remove User
